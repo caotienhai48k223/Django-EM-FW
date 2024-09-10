@@ -1,0 +1,32 @@
+{% extends '../layouts/default.html' %}
+
+{% block content %}
+{% for message in messages%}
+  <span style="color: red;">{{message}}</span>
+{% endfor %}
+<h1>Xin Chào {{request.user}}</h1>
+<br><br>
+{% if request.user.profile.photo %}
+  {% if attendance %}
+    {% if attendance.checked_in and attendance.checked_out %}
+    <h3>Ngày bựa ni đi làm rồi nha</h3>
+    {% elif attendance.checked_in and not attendance.checked_out%}
+    <a href="/check-out/" class="btn btn-success">Check Out</a>
+    {% elif attendance.checked_in %}
+    <a href="/check-out/" class="btn btn-success">Check Out</a>
+    {% else %}
+    <h3>Bắt đầu ngày mới thôi</h3>
+    <a href="/check-in/" class="btn btn-success">Check In</a>
+    {% endif %}
+  {% else %}
+    <h3>Bắt đầu ngày mới thôi</h3>
+    <a href="/check-in/" class="btn btn-success">Check In</a>
+  {% endif %}
+<a href="/create-faceid/" class="btn btn-secondary">Sửa Face ID</a>
+<br><br>
+{% else %}
+<h3>Bạn chưa phải là nhân viên, vui lòng tạo Face ID để thành nhân viên</h3>
+<a href="/create-faceid/" class="btn btn-success">Tạo Face ID</a>
+<br><br>
+{% endif %}
+{% endblock %}

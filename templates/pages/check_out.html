@@ -1,0 +1,19 @@
+{% extends '../layouts/default.html' %}
+
+{% block content %}
+<h1>{{request.user.username}} check out {{date}}</h1>
+<h2>Bạn đã làm việc được {{time}}. Bạn muốn check out chứ?</h2>
+<div class="text-center">
+  <video autoplay id="video-element"></video>
+</div>
+<div class="text-center mt-3" id="img-element"></div>
+<div class="text-center mt-3">
+  <button class="btn btn-success" id="capture-btn">Check Out</button>
+  <button class="btn btn-info" id="reload-btn">Reload</button>
+</div>
+{% endblock %}
+
+{% block scripts %}
+  {% load static %}
+  <script src="{% static 'js/check_out.js' %}" defer></script>
+{% endblock %}

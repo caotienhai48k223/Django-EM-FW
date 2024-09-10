@@ -1,0 +1,21 @@
+{% extends '../layouts/default.html' %}
+
+{% block content %}
+<h1>Tạo Face ID</h1>
+<div class="text-center">
+  <video autoplay id="video-element"></video>
+</div>
+<div class="text-center mt-3">
+  <button class="btn btn-primary" id="capture-btn">Chụp</button>
+</div>
+<div class="text-center mt-3" id="img-element"></div>
+<div class="text-center mt-3 d-none" id="button-element">
+  <button class="btn btn-info" id="reload-btn">Chụp Lại</button>
+  <button class="btn btn-success" id="upload-btn">Xác Nhận Hình Ảnh</button>
+</div>
+{% endblock %}
+
+{% block scripts %}
+  {% load static %}
+  <script src="{% static 'js/create_faceid.js' %}" defer></script>
+{% endblock %}

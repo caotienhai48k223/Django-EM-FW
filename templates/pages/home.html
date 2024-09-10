@@ -1,0 +1,9 @@
+{% extends '../layouts/default.html' %}
+
+{% block content %}
+{% for message in messages%}
+  <span style="color: red;">{{message}}</span>
+{% endfor %}
+<h1>Welcome to website</h1>
+<br><br>
+{% endblock %}

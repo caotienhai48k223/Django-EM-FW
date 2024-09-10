@@ -1,0 +1,46 @@
+{% extends '../layouts/default.html' %}
+
+{% block content %}
+{% for message in messages%}
+  <span style="color: red;">{{message}}</span>
+{% endfor %}
+<div class="container">
+  <div class="row">
+    <center>
+      <div class="col-8">
+        <div class="card" style="width: 38rem;">
+          <div class="card-body text-bg-dark">
+            <h3 class="card-title">{{user.username}}</h3>
+          </div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">Email: <strong>{{user.email}}</strong></li>
+            <li class="list-group-item">Họ: <strong>{{user.first_name}}</strong></li>
+            <li class="list-group-item">Tên: <strong>{{user.last_name}}</strong></li>
+            <li class="list-group-item">Số Điện Thoại: <strong>{{user.profile.phone_number}}</strong></li>
+            {% if user.profile.start_date %}
+            <li class="list-group-item">Chức Vụ: <strong>{{user.profile.position}}</strong></li>
+            <li class="list-group-item">Ngày Vào Làm: <strong>{{user.profile.start_date}}</strong></li>
+              {% if user.profile.end_date %}
+              <li class="list-group-item">Ngày Nghỉ Làm: <strong>{{user.profile.start_date}}</strong></li>
+              {% else %}
+              <li class="list-group-item">Ngày Nghỉ Làm: <strong>Đang Làm</strong></li>
+              {% endif %}
+            {% else %}
+            <li class="list-group-item">Chức Vụ: <strong>Đang Thực Tập</strong></li>
+            <li class="list-group-item">Ngày Vào Làm: <strong>Chưa Vào Làm</strong></li>
+            <li class="list-group-item">Ngày Nghỉ Làm: <strong>Chưa Vào Làm</strong></li>
+            {% endif %}
+          </ul>
+          <div class="card-body">
+            {% if request.user.is_superuser %}
+            <a href="/time-sheet/" class="btn btn-secondary">Quay Lại Bảng Công</a>
+            {% else %}
+            <a href="/" class="btn btn-secondary">Trang Chủ</a>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </center>
+  </div>
+</div>
+{% endblock %}

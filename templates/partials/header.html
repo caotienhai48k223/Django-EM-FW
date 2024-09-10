@@ -1,0 +1,44 @@
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/"><i class='fas fa-home pe-2'></i>EM&FW</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="collapsibleNavbar" style="justify-content: space-between;">
+      <ul class="navbar-nav gap-3">
+        {% if user.is_authenticated %}
+        <li class="nav-item">
+          <a class="nav-link" href="{% if request.user.is_superuser %}/time-sheet/{% else %}/time-sheet/user_id={{request.user.id}}{% endif %}"><i class='fas fa-table pe-2'></i>Bảng Chấm Công</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"><i class='fas fa-id-card pe-2'></i>Hồ Sơ</a>
+          <ul class="dropdown-menu bg-dark">
+            <li class="nav-item"><a class="nav-link" href="/profile/{{request.user.username}}/"><i class="fa-solid fa-file pe-2"></i>Xem Hồ Sơ</a></li>
+            <li class="nav-item"><a class="nav-link" href="#"><i class="fa-solid fa-file-pen pe-2"></i>Sửa Hồ Sơ</a></li>
+          </ul>
+        </li>  
+        {% endif %} 
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown">{% if request.user.is_authenticated%}<i class='fas fa-user-check pe-2'></i>{% else %}<i class='fas fa-user-times pe-2'></i>{% endif %}Tài Khoản</a>
+          <ul class="dropdown-menu bg-dark">
+            {% if user.is_authenticated %}
+            <li class="nav-item"><a class="nav-link" href="/account/"><i class='fas fa-user-alt pe-2'></i>Tài Khoản</a></li>
+            <!-- <li class="nav-item"><a class="nav-link" href="/login/"><i class='fas fa-user-plus pe-2'></i>Đăng Nhập</a></li> -->
+            <li class="nav-item"><a class="nav-link" href="/logout/"><i class='fas fa-user-minus pe-2'></i>Đăng Xuất</a></li>
+            <!-- <li class="nav-item"><a class="nav-link" href="/register/"><i class='fas fa-user-edit pe-2'></i>Đăng Ký</a></li> -->
+            {% else %}
+            <!-- <li class="nav-item"><a class="nav-link" href="/account/"><i class='fas fa-user-alt pe-2'></i>Tài Khoản</a></li> -->
+            <li class="nav-item"><a class="nav-link" href="/login/"><i class='fas fa-user-plus pe-2'></i>Đăng Nhập</a></li>
+            <!-- <li class="nav-item"><a class="nav-link" href="/logout/"><i class='fas fa-user-minus pe-2'></i>Đăng Xuất</a></li> -->
+            <li class="nav-item"><a class="nav-link" href="/register/"><i class='fas fa-user-edit pe-2'></i>Đăng Ký</a></li>
+            {% endif %}
+          </ul>
+        </li>  
+      </ul>
+      <form class="d-flex">
+        <input class="form-control me-2" type="text" placeholder="Search">
+        <button class="btn btn-outline-light" type="button">Search</button>
+      </form>
+    </div>
+  </div>
+</nav>
